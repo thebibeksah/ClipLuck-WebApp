@@ -1,0 +1,52 @@
+{% extends 'template.html' %}
+{% block body %}
+    <div class="container my-3">
+    <form action="/clip" method="post" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label for="clip" class="form-label">Clip Text</label>
+        <input type="text" autofocus class="form-control" name="content" id="clip" aria-describedby="clipHelp">
+          <input type="file" class="form-control mt-3" name="file" id="file" accept=".jpg, .jpeg, .png, .gif, .mp4, .mkv, .pdf, .zip">
+      </div>
+      <button type="submit" class="btn btn-primary">Add Clip</button>
+      <button class="btn btn-primary def-btn"><a href="/delete_all">Delete All</a></button>
+      <button class="btn btn-primary def-btn"><a href="/logout">Take a Break</a></button>
+        {% if clips|length < 1 %}
+    <div class="alert alert-primary my-3" role="alert">
+      There are no clips. Add clips to view here!
+    </div>
+    {% else %}
+    <table class="table my-3">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Clips</th>
+            <th scope="col">Date</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for clip in clips | reverse %}
+          <tr>
+            <th scope="row">{{loop.index}}</th>
+            <td>
+                {{clip.content}} <br>
+                {% if clip.filename %}
+                <p class="fw-bold mb-0 mt-3">Media File</p>
+                {{clip.filename}}
+                <div>
+                    <a href="{{ url_for('view', filename=clip.filename) }}">View</a>
+                    <a href="{{ url_for('download', filename=clip.filename) }}" download>Download</a>
+                </div>
+              {% endif %}
+            </td>
+            <td>{{clip.date_created.date()}}</td>
+            <td><a href="/delete/{{clip.id}}">Delete</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% endif %}
+    </form>
+
+    </div>
+{% endblock %}

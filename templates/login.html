@@ -1,0 +1,12 @@
+{% extends 'template.html' %}
+
+{% block body %}
+    <div class="container my-3">
+    <form action="/" method="post">
+      <div class="mb-3">
+        <label for="clip" class="form-label">Password</label>
+        <input type="password" autofocus class="form-control" name="password" id="clip" aria-describedby="clipHelp">
+      </div>
+      <button type="submit" class="btn btn-primary">Authenticate</button>
+    </form></div>
+{% endblock %}
