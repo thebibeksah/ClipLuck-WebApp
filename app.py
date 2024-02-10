@@ -14,7 +14,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///tasks.db'
 app.config['UPLOAD_FOLDER'] = 'uploads'
 db = SQLAlchemy(app)
 app.config['SECRET_KEY'] = os.urandom(24)
-key = "flaskbee69"
+key = "clipluck-bee"
 
 
 class Task(db.Model):
