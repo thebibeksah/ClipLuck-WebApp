@@ -85,9 +85,7 @@ def download(filename):
 def view(filename):
     if filename:
         return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
-    else:
-        pass
-
+    
 
 @app.route('/delete/<int:id>')
 def delete(id):
